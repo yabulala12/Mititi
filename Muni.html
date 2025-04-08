@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Vibes 🎉</title>
+  <style>
+    body {
+      background-color: #fce4ec;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 50px;
+      color: #880e4f;
+    }
+
+    h1 {
+      font-size: 3em;
+    }
+
+    #countdown {
+      font-size: 1.5em;
+      margin-bottom: 30px;
+    }
+
+    #message {
+      font-size: 1.2em;
+      margin: 20px;
+    }
+
+    #photo {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      background-color: #f06292;
+      color: white;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+
+    button:hover {
+      background-color: #ec407a;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hello, Bestie! 💖</h1>
+
+  <div id="countdown">Loading birthday countdown...</div>
+
+  <p id="message">Click the button for a surprise!</p>
+  <button onclick="revealSurprise()">Reveal Message & Photo</button>
+
+  <div>
+    <img id="photo" src="" alt="Your surprise photo will show here!" style="display: none;">
+  </div>
+
+  <script>
+    // 🎂 BIRTHDAY COUNTDOWN
+    const today = new Date();
+let birthday = new Date(today.getFullYear(), 3, 6); // April is month 3 (0-based)
+
+const isTodayBirthday =
+  today.getDate() === birthday.getDate() &&
+  today.getMonth() === birthday.getMonth();
+
+if (isTodayBirthday) {
+  document.getElementById("countdown").innerText =
+    "🎉 Today is your birthday! Happy Birthday! 🥳🎂";
+} else {
+  if (today > birthday) {
+    birthday.setFullYear(today.getFullYear() + 1);
+  }
+
+  const diff = birthday - today;
+  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+  document.getElementById("countdown").innerText =
+    `🎂 Only ${days} day(s) left until your birthday!`;
+}
+
+
+    // 💬 MESSAGES + PHOTOS
+    const messages = [
+      "You're amazing! 🌟",
+      "You light up every room 💡",
+      "I'm lucky to know you 🙌",
+      "Never forget how awesome you are 💖",
+      "You're one of a kind 💎"
+    ];
+
+    const photos = [
+      "https://i.imgur.com/1Xc5Nsp.jpeg",
+      "https://i.imgur.com/6WfRJil.jpeg",
+      "https://i.imgur.com/VxYQX2M.jpeg",
+      "https://i.imgur.com/U81IgHl.jpeg",
+      "https://i.imgur.com/HBzMLP5.jpeg"
+    ];
+
+    function revealSurprise() {
+      // Random message
+      const messageIndex = Math.floor(Math.random() * messages.length);
+      document.getElementById("message").innerText = messages[messageIndex];
+
+      // Random photo
+      const photoIndex = Math.floor(Math.random() * photos.length);
+      const photo = document.getElementById("photo");
+      photo.src = photos[photoIndex];
+      photo.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday 🎉</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      color: #333;
+      margin: 0;
+    }
+
+    #splash {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: #fff4e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #loader {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #ff6f61;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    img {
+      width: 80%;
+      max-width: 300px;
+      border-radius: 20px;
+      margin-top: 20px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ff3c2f;
+    }
+
+    /* Media Queries for responsiveness */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+
+      #loader {
+        width: 30px;
+        height: 30px;
+      }
+
+      img {
+        max-width: 250px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+    }
+
+    @media (min-width: 769px) {
+      body {
+        padding: 50px;
+      }
+
+      #loader {
+        width: 60px;
+        height: 60px;
+      }
+
+      img {
+        max-width: 400px;
+      }
+
+      button {
+        font-size: 18px;
+        padding: 12px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="splash">
+    <div id="loader"></div>
+    <p>Loading birthday magic...</p>
+  </div>
+
+  <h1>🎂 Birthday Countdown 🎂</h1>
+  <p id="countdown"></p>
+  <img id="photo" src="" alt="Birthday Moment" />
+  <br />
+  <button onclick="showRandomPhoto()">Next Photo</button>
+  <br />
+  <button onclick="window.location.href='clickWhenBored.html'">Go to the Fun Page!</button>
+
+  <script>
+    // SPLASH remove after 2s
+    setTimeout(() => {
+      document.getElementById("splash").style.display = "none";
+    }, 2000);
+
+    // COUNTDOWN
+    const today = new Date();
+    let birthday = new Date(today.getFullYear(), 3, 6); // April 6
+
+    const isTodayBirthday =
+      today.getDate() === birthday.getDate() &&
+      today.getMonth() === birthday.getMonth();
+
+    if (isTodayBirthday) {
+      document.getElementById("countdown").innerText =
+        "🎉 Today is your birthday! Happy Birthday! 🥳🎂";
+      alert("🎉 Happy Birthday!!! 🎁💖\nHope your day is magical ✨");
+    } else {
+      if (today > birthday) {
+        birthday.setFullYear(today.getFullYear() + 1);
+      }
+
+      const diff = birthday - today;
+      const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      document.getElementById("countdown").innerText =
+        `🎂 Only ${days} day(s) left until your birthday!`;
+    }
+
+    // RANDOM PHOTO
+    const photos = [
+      "images/1.jpg",
+      "images/2.jpg",
+      "images/3.jpg",
+      "images/4.jpg",
+      "images/5.jpg",
+      "images/6.jpg",
+      "images/7.jpg"
+    ];
+
+    function showRandomPhoto() {
+      const randomPhoto = photos[Math.floor(Math.random() * photos.length)];
+      document.getElementById("photo").src = randomPhoto;
+    }
+
+    // Show first photo on load
+    showRandomPhoto();
+  </script>
+</body>
+</html>
