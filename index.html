@@ -11,7 +11,9 @@
       padding: 30px;
       background: linear-gradient(to right, #ffecd2, #fcb69f);
       color: #333;
+      margin: 0;
     }
+
     #splash {
       position: fixed;
       top: 0; left: 0;
@@ -23,6 +25,7 @@
       justify-content: center;
       z-index: 9999;
     }
+
     #loader {
       border: 5px solid #f3f3f3;
       border-top: 5px solid #ff6f61;
@@ -32,16 +35,19 @@
       animation: spin 1s linear infinite;
       margin-bottom: 10px;
     }
+
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
     img {
       width: 80%;
       max-width: 300px;
       border-radius: 20px;
       margin-top: 20px;
     }
+
     button {
       margin-top: 15px;
       padding: 10px 20px;
@@ -52,8 +58,50 @@
       font-size: 16px;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #ff3c2f;
+    }
+
+    /* Media Queries for responsiveness */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+
+      #loader {
+        width: 30px;
+        height: 30px;
+      }
+
+      img {
+        max-width: 250px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+    }
+
+    @media (min-width: 769px) {
+      body {
+        padding: 50px;
+      }
+
+      #loader {
+        width: 60px;
+        height: 60px;
+      }
+
+      img {
+        max-width: 400px;
+      }
+
+      button {
+        font-size: 18px;
+        padding: 12px 24px;
+      }
     }
   </style>
 </head>
@@ -65,7 +113,10 @@
 
   <h1>🎂 Birthday Countdown 🎂</h1>
   <p id="countdown"></p>
-
+  <img id="photo" src="" alt="Birthday Moment" />
+  <br />
+  <button onclick="showRandomPhoto()">Next Photo</button>
+  <br />
   <button onclick="window.location.href='clickWhenBored.html'">Go to the Fun Page!</button>
 
   <script>
@@ -97,6 +148,24 @@
         `🎂 Only ${days} day(s) left until your birthday!`;
     }
 
+    // RANDOM PHOTO
+    const photos = [
+      "images/1.jpg",
+      "images/2.jpg",
+      "images/3.jpg",
+      "images/4.jpg",
+      "images/5.jpg",
+      "images/6.jpg",
+      "images/7.jpg"
+    ];
+
+    function showRandomPhoto() {
+      const randomPhoto = photos[Math.floor(Math.random() * photos.length)];
+      document.getElementById("photo").src = randomPhoto;
+    }
+
+    // Show first photo on load
+    showRandomPhoto();
   </script>
 </body>
 </html>
